@@ -1,0 +1,18 @@
+num = 50
+
+while True:
+
+    guess = int(input("Guess the number: "))
+
+    if guess == num:
+
+        print("Correct! You Win")
+        break
+
+    elif guess < num:
+
+        print("Higher")
+
+    else:
+
+        print("Lower")
