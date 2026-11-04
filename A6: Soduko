@@ -1,0 +1,38 @@
+def solved(board):
+    for r in range(4):
+        for c in range(4):
+            if board[r][c]==0:
+                for n in range(1,5):
+                    if valid(board,r,c,n):
+                        board[r][c]=n
+                        
+                        if solved(board):
+                            return True
+                        board[r][c]=0
+                        
+                return False
+            
+    return True
+
+def valid(board,r,c,n):
+    for i in range(4):
+        if board[r][i]==n or board[i][c]==n:
+            return False
+    for i in range(r//2*2, r//2*2+2):
+        for j in range(c//2*2,c//2*2+2):
+            if board[i][j]==n:
+                return False
+    return True
+
+board=[
+    [1,0,0,4],
+    [0,4,1,0],
+    [0,1,4,0],
+    [4,0,0,1]
+]
+
+if solved(board):
+    for row in board:
+        print(row)
+else:
+    print("No solution exists")
