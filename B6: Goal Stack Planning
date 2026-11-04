@@ -1,0 +1,22 @@
+
+start = ["A", "B", "C"]
+goal = ["C", "B", "A"]
+
+stack = start.copy()
+moves = []
+
+while stack:
+    block = stack.pop()
+    moves.append("Move " + block + " to Table")
+
+for block in goal:
+    if stack:
+        stack.append(block)
+    else:
+        stack.append(block)
+    moves.append("Place " + block)
+
+print("Goal State:", stack)
+print("Moves:")
+for m in moves:
+    print(m)
