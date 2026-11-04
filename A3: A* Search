@@ -1,0 +1,53 @@
+import heapq
+
+goal = [1, 2, 3, 4, 5, 6, 7, 8, 0]
+
+def heuristic(state):
+    h = 0
+    for i in range(9):
+        if state[i] != 0:
+            j = goal.index(state[i])
+            h += abs(i // 3 - j // 3) + abs(i % 3 - j % 3)
+    return h
+
+def astar(start):
+    pq = [(heuristic(start), start)]
+    visited = set()
+
+    while pq:
+        f, state = heapq.heappop(pq)
+
+        if state == goal:
+            print("Goal Reached:", state)
+            return
+
+        if tuple(state) in visited:
+            continue
+
+        visited.add(tuple(state))
+        zero = state.index(0)
+
+        for move in [-3, 3, -1, 1]:
+            new = zero + move
+
+            if 0 <= new < 9:
+                if move in [-1, 1] and zero // 3 != new // 3:
+                    continue
+
+                child = state.copy()
+                child[zero], child[new] = child[new], child[zero]
+
+                if tuple(child) not in visited:
+                    g = len(visited)
+                    h = heuristic(child)
+                    heapq.heappush(pq, (g + h, child))
+
+start = [1, 2, 3, 4, 0, 6, 7, 5, 8]
+
+astar(start)
+
+
+
+
+
+
